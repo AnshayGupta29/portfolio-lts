@@ -1,0 +1,33 @@
+<div class="h-screen max-h-screen overflow-hidden hero-container p-4 md:p-8 flex flex-column">
+    <!-- Animated Background Shapes -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+
+    <div class="overflow-y-auto flex-grow-1 z-1 relative">
+        <div class="text-center mb-8 fade-in-up delay-100">
+        <h2 class="text-5xl font-bold text-white mb-3" style="text-shadow: 0 0 20px rgba(255,255,255,0.3);">Featured Projects</h2>
+        <p class="text-xl text-gray-300">Some of my recent work</p>
+    </div>
+
+    <div class="grid justify-content-center gap-5">
+        <div class="col-12 md:col-6 lg:col-4 fade-in-up delay-200" *ngFor="let project of projects; let i = index" [style.animation-delay]="(200 + i * 150) + 'ms'">
+            <div class="premium-glass h-full hover-scale overflow-hidden flex flex-column hover-glow transition-all duration-300">
+                <div class="h-15rem w-full bg-gradient-primary flex align-items-center justify-content-center">
+                    <i class="pi pi-image text-white text-6xl opacity-50"></i>
+                </div>
+                <div class="p-5 flex flex-column flex-grow-1">
+                    <h3 class="text-2xl font-bold text-white mb-2">{{project.title}}</h3>
+                    <p class="text-gray-300 line-height-3 mb-4 flex-grow-1">{{project.description}}</p>
+                    
+                    <div class="flex gap-2 flex-wrap mb-4">
+                        <p-tag *ngFor="let tag of project.tags" [value]="tag" severity="info" styleClass="text-sm bg-white-alpha-20 text-white border-none"></p-tag>
+                    </div>
+                    
+                    <a [href]="project.link" target="_blank" pButton label="View Details" icon="pi pi-external-link" class="p-button-outlined p-button-rounded text-white border-white hover:bg-white-alpha-10 w-full justify-content-center transition-colors duration-300"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

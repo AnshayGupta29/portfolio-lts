@@ -1,0 +1,15 @@
+.bg-gradient-to-r {
+    background: linear-gradient(to right, var(--tw-gradient-stops));
+}
+.from-cyan-500 {
+    --tw-gradient-from: #06b6d4;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(6, 182, 212, 0));
+}
+.to-blue-500 {
+    --tw-gradient-to: #3b82f6;
+}
+
+:host ::ng-deep .p-inputtext:enabled:focus {
+    box-shadow: 0 0 0 1px #3b82f6;
+    border-color: #3b82f6;
+}

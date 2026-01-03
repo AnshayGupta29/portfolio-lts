@@ -1,0 +1,10 @@
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.hover-scale {
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.05);
+  }
+}

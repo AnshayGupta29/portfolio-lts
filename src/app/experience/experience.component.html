@@ -1,0 +1,94 @@
+<div class="min-h-screen hero-container p-4 md:p-8 flex flex-column relative">
+    <!-- Animated Background Shapes -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+
+    <div class="flex-grow-1 z-1 relative">
+        <!-- Work Experience Section -->
+        <div class="text-center mb-6 fade-in-up delay-100">
+            <h2 class="text-5xl font-bold text-white mb-3" style="text-shadow: 0 0 20px rgba(255,255,255,0.3);">Work Experience</h2>
+        </div>
+
+        <div class="grid justify-content-center gap-5 mb-8">
+            <div class="col-12 lg:col-8 fade-in-up delay-200" *ngFor="let exp of workExperiences; let i = index" [style.animation-delay]="(200 + i * 150) + 'ms'">
+                <div class="premium-glass p-5 hover-scale hover-glow transition-all duration-300">
+                    <div class="flex flex-column md:flex-row justify-content-between align-items-start md:align-items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white m-0">{{exp.role}}</h3>
+                            <div class="text-cyan-300 font-medium text-lg mt-1">{{exp.company}}</div>
+                        </div>
+                        <div class="flex flex-column align-items-start md:align-items-end mt-2 md:mt-0">
+                            <span class="text-gray-300 flex align-items-center gap-2">
+                                <i class="pi pi-calendar"></i>
+                                {{exp.period}}
+                            </span>
+                            <span class="text-gray-400 text-sm mt-1 flex align-items-center gap-2">
+                                <i class="pi pi-map-marker"></i>
+                                {{exp.location}}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="pl-3 border-left-2 border-cyan-500-alpha-30">
+                        <ul class="list-none p-0 m-0 flex flex-column gap-2">
+                            <li *ngFor="let desc of exp.description" class="text-gray-300 line-height-3 flex align-items-start gap-2">
+                                <i class="pi pi-circle-fill text-xs mt-2 text-cyan-500"></i>
+                                <span>{{desc}}</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="flex gap-2 flex-wrap mt-4">
+                            <span *ngFor="let tech of exp.techStack" class="bg-white-alpha-10 text-white px-3 py-1 border-round-2xl text-sm font-medium border-1 border-white-alpha-20">
+                                {{tech}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Internship Section -->
+        <div class="text-center mb-6 fade-in-up delay-300">
+            <h2 class="text-5xl font-bold text-white mb-3" style="text-shadow: 0 0 20px rgba(255,255,255,0.3);">Internships</h2>
+        </div>
+
+        <div class="grid justify-content-center gap-5 pb-8">
+            <div class="col-12 lg:col-8 fade-in-up delay-400" *ngFor="let intern of internships; let i = index" [style.animation-delay]="(400 + i * 150) + 'ms'">
+                <div class="premium-glass p-5 hover-scale hover-glow transition-all duration-300">
+                    <div class="flex flex-column md:flex-row justify-content-between align-items-start md:align-items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white m-0">{{intern.role}}</h3>
+                            <div class="text-cyan-300 font-medium text-lg mt-1">{{intern.company}}</div>
+                        </div>
+                        <div class="flex flex-column align-items-start md:align-items-end mt-2 md:mt-0">
+                            <span class="text-gray-300 flex align-items-center gap-2">
+                                <i class="pi pi-calendar"></i>
+                                {{intern.period}}
+                            </span>
+                            <span class="text-gray-400 text-sm mt-1 flex align-items-center gap-2">
+                                <i class="pi pi-map-marker"></i>
+                                {{intern.location}}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="pl-3 border-left-2 border-cyan-500-alpha-30">
+                        <ul class="list-none p-0 m-0 flex flex-column gap-2">
+                            <li *ngFor="let desc of intern.description" class="text-gray-300 line-height-3 flex align-items-start gap-2">
+                                <i class="pi pi-circle-fill text-xs mt-2 text-cyan-500"></i>
+                                <span>{{desc}}</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="flex gap-2 flex-wrap mt-4">
+                            <span *ngFor="let tech of intern.techStack" class="bg-white-alpha-10 text-white px-3 py-1 border-round-2xl text-sm font-medium border-1 border-white-alpha-20">
+                                {{tech}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,237 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    --accent-gradient: linear-gradient(to right, #f83600 0%, #f9d423 100%);
+    --surface-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    font-family: var(--font-family);
+    margin: 0;
+    min-height: 100vh;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Glassmorphism Utilities */
+.premium-glass {
+    background: rgba(15, 23, 42, 0.6); /* Darker slate/teal base */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(45, 212, 191, 0.1); /* Teal tinted border */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 1.5rem;
+}
+
+.glass-input {
+    background: rgba(15, 23, 42, 0.6) !important; /* Dark slate */
+    border: 1px solid rgba(45, 212, 191, 0.1) !important; /* Subtle teal border */
+    color: white !important;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border-color: #2dd4bf !important; /* Teal-400 */
+    box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.2) !important;
+}
+
+.glass-input::placeholder {
+    color: rgba(148, 163, 184, 0.5); /* Slate-400 */
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -40px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(30px, 50px) rotate(10deg); }
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.4); } /* Teal glow */
+    70% { box-shadow: 0 0 0 15px rgba(45, 212, 191, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out both;
+}
+
+.fade-in-down {
+    animation: fadeInDown 0.8s ease-out both;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite alternate;
+}
+
+.animate-pulse {
+    animation: pulse-glow 2s infinite;
+}
+
+.animate-pulse-slow {
+    animation: pulse-glow 3s infinite;
+}
+
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hover-scale:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.3); /* Teal glow */
+}
+
+.hover-glow-border:hover {
+    border-color: rgba(45, 212, 191, 0.3);
+    box-shadow: 0 0 30px rgba(45, 212, 191, 0.1);
+}
+
+.text-gradient-cyan {
+    background: linear-gradient(to right, #2dd4bf 0%, #06b6d4 100%); /* Teal to Cyan */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Animation Delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Background Shapes */
+.hero-container {
+    position: relative;
+    overflow: hidden;
+    background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.hero-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85); /* Dark overlay to maintain readability */
+    z-index: 0;
+}
+
+.shape {
+    position: absolute;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.4;
+    border-radius: 50%;
+}
+
+.shape-1 {
+    top: -10%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.3) 0%, rgba(0, 0, 0, 0) 70%); /* Teal */
+}
+
+.shape-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(0, 0, 0, 0) 70%); /* Cyan */
+    animation-delay: -5s;
+}
+
+.shape-3 {
+    top: 40%;
+    left: 40%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(14, 116, 144, 0.2) 0%, rgba(0, 0, 0, 0) 70%); /* Dark Cyan */
+    animation-duration: 15s;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* PrimeNG Overrides for Dark Theme compatibility */
+.p-toast .p-toast-message {
+    background: rgba(30, 30, 40, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.p-tag {
+    font-weight: 600;
+}

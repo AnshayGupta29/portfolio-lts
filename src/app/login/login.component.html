@@ -1,0 +1,86 @@
+<div class="min-h-screen overflow-hidden hero-container flex align-items-center justify-content-center p-4">
+    <!-- Animated Background Shapes -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+
+  <p-card class="w-full max-w-30rem shadow-8 border-round-2xl overflow-hidden glass-card fade-in-up delay-200 z-1">
+    <div class="text-center mb-5">
+      <i class="pi pi-user text-5xl text-primary mb-3"></i>
+      <h2 class="text-3xl font-bold m-0 text-white">Login</h2>
+      <p class="text-white-alpha-70 mt-2">Access your portfolio dashboard</p>
+    </div>
+
+    <div class="flex flex-column gap-3">
+      <!-- Step 1: Phone Number -->
+      <div *ngIf="!isOtpSent">
+        <label for="phone" class="block text-white font-medium mb-2">Phone Number</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon bg-white-alpha-10 border-white-alpha-20 text-white">
+            <i class="pi pi-phone"></i>
+          </span>
+          <input 
+            id="phone" 
+            type="tel" 
+            pInputText 
+            [(ngModel)]="phoneNumber" 
+            placeholder="9560850428"
+            class="bg-white-alpha-10 text-white border-white-alpha-20 focus:border-primary w-full"
+            (keydown.enter)="sendOtp()"
+          />
+        </div>
+        <small class="text-white-alpha-50 mt-1 block">Enter number without country code (Default: +91)</small>
+
+        <button 
+          pButton 
+          label="Send OTP" 
+          icon="pi pi-arrow-right" 
+          class="w-full mt-4 p-button-lg border-round-xl" 
+          [loading]="isLoading"
+          (click)="sendOtp()">
+        </button>
+      </div>
+
+      <!-- Step 2: OTP -->
+      <div *ngIf="isOtpSent">
+        <label for="otp" class="block text-white font-medium mb-2">Enter OTP</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon bg-white-alpha-10 border-white-alpha-20 text-white">
+            <i class="pi pi-lock"></i>
+          </span>
+          <input 
+            id="otp" 
+            type="text" 
+            pInputText 
+            [(ngModel)]="otp" 
+            placeholder="123456"
+            class="bg-white-alpha-10 text-white border-white-alpha-20 focus:border-primary w-full text-center text-xl letter-spacing-2"
+            maxlength="6"
+            (keydown.enter)="verifyOtp()"
+          />
+        </div>
+        
+        <div class="flex justify-content-between align-items-center mt-4 gap-3">
+          <button 
+            pButton 
+            label="Back" 
+            icon="pi pi-arrow-left" 
+            class="p-button-text text-white" 
+            (click)="isOtpSent = false">
+          </button>
+          
+          <button 
+            pButton 
+            label="Verify & Login" 
+            icon="pi pi-check" 
+            class="flex-1 p-button-lg border-round-xl" 
+            [loading]="isLoading"
+            (click)="verifyOtp()">
+          </button>
+        </div>
+      </div>
+    </div>
+  </p-card>
+</div>
+
+<p-toast position="bottom-center"></p-toast>
