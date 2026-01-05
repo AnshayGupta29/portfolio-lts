@@ -1,10 +1,5 @@
 <div class="min-h-screen overflow-hidden hero-container flex align-items-center justify-content-center p-4">
-    <!-- Animated Background Shapes -->
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-
-  <p-card class="w-full max-w-30rem shadow-8 border-round-2xl overflow-hidden glass-card fade-in-up delay-200 z-1">
+  <p-card class="w-full max-w-30rem shadow-8 border-round-2xl overflow-hidden glass-card z-1">
     <div class="text-center mb-5">
       <i class="pi pi-user text-5xl text-primary mb-3"></i>
       <h2 class="text-3xl font-bold m-0 text-white">Login</h2>
@@ -29,7 +24,22 @@
             (keydown.enter)="sendOtp()"
           />
         </div>
-        <small class="text-white-alpha-50 mt-1 block">Enter number without country code (Default: +91)</small>
+        <small class="text-white-alpha-50 mt-1 block">Enter number without country code</small>
+
+        <label for="captcha" class="block text-white font-medium mb-2 mt-4">Captcha</label>
+        <div class="flex gap-2">
+          <div class="p-2 px-3 border-round bg-white-alpha-10 text-white font-bold tracking-widest">{{ captcha }}</div>
+          <input
+            id="captcha"
+            type="text"
+            pInputText
+            [(ngModel)]="captchaInput"
+            placeholder="Enter captcha"
+            class="flex-1 bg-white-alpha-10 text-white border-white-alpha-20 focus:border-primary"
+            (keydown.enter)="sendOtp()"
+          />
+          <button pButton icon="pi pi-refresh" class="p-button-text text-white" (click)="generateCaptcha()"></button>
+        </div>
 
         <button 
           pButton 

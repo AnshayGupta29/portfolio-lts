@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,8 @@ import { ToastModule } from 'primeng/toast';
 })
 export class LoginComponent implements OnInit {
   phoneNumber: string = '';
+  captcha: string = '';
+  captchaInput: string = '';
   otp: string = '';
   
   isOtpSent: boolean = false;
@@ -33,39 +36,71 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router, 
     private messageService: MessageService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    this.generateCaptcha();
   }
 
-  async sendOtp() {
+  generateCaptcha() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    this.captcha = code;
+    this.captchaInput = '';
+  }
+
+  sendOtp() {
     if (!this.phoneNumber) {
       this.messageService.add({ severity: 'warn', summary: 'Missing Phone', detail: 'Please enter your phone number' });
       return;
     }
 
+    if (!this.captchaInput) {
+      this.messageService.add({ severity: 'warn', summary: 'Missing Captcha', detail: 'Please enter the captcha' });
+      return;
+    }
+
+    if (this.captchaInput.trim().toUpperCase() !== this.captcha.toUpperCase()) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Captcha', detail: 'Captcha does not match' });
+      this.generateCaptcha();
+      return;
+    }
+
     this.isLoading = true;
-    
-    // Simulate API call
-    setTimeout(() => {
+    this.authService.sendOtp({ phoneNumber: this.phoneNumber }).subscribe({
+      next: (res) => {
         this.isLoading = false;
-        this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Firebase has been removed. Auth is disabled.' });
-        // this.isOtpSent = true; // Uncomment to test UI flow
-    }, 1000);
+        this.isOtpSent = true;
+        this.messageService.add({ severity: 'success', summary: 'OTP Sent', detail: res.message });
+      },
+      error: () => {
+        this.isLoading = false;
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to send OTP' });
+      }
+    });
   }
 
-  async verifyOtp() {
-    if (!this.otp) {
+  verifyOtp() {
+    if (!this.otp || this.otp.trim().length < 4) {
       return;
     }
 
     this.isLoading = true;
 
-    // Simulate API call
-    setTimeout(() => {
+    this.authService.verifyOtp({ phoneNumber: this.phoneNumber, otp: this.otp }).subscribe({
+      next: (res) => {
         this.isLoading = false;
-        this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Firebase has been removed. Auth is disabled.' });
-    }, 1000);
+        localStorage.setItem('auth_token', res.token);
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });
+        this.router.navigate(['/about']);
+      },
+      error: () => {
+        this.isLoading = false;
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid OTP' });
+      }
+    });
   }
 }

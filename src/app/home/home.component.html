@@ -1,11 +1,8 @@
-<div class="min-h-screen flex align-items-center justify-content-center bg-gradient-primary">
-  <div class="text-center">
-    <h1 class="text-6xl font-bold text-white mb-3">Welcome to My Portfolio</h1>
-    <p class="text-2xl text-white-alpha-80 mb-5">Explore my skills, projects, and journey.</p>
-    
-    <div class="flex gap-3 justify-content-center">
-      <button pButton label="About Me" routerLink="/about" class="p-button-lg p-button-rounded bg-white text-primary border-none hover-scale"></button>
-      <button pButton label="View Projects" routerLink="/projects" class="p-button-lg p-button-rounded p-button-outlined text-white hover:bg-white-alpha-10 hover-scale"></button>
-    </div>
-  </div>
+<div class="flex flex-column">
+  <app-about></app-about>
+  <app-education></app-education>
+  <app-experience></app-experience>
+  <app-projects></app-projects>
+  <app-skills></app-skills>
+  <app-contact></app-contact>
 </div>

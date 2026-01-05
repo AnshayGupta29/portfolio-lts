@@ -6,6 +6,7 @@ import { InputTextarea } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ContactService } from '../services/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -35,9 +36,12 @@ export class ContactComponent {
     { platform: 'WhatsApp', icon: 'pi pi-whatsapp', url: 'https://wa.me/919560850428' }
   ];
 
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private messageService: MessageService,
+    private contactService: ContactService
+  ) {}
 
-  async sendMessage() {
+  sendMessage() {
     const name = (this.name || '').trim();
     const email = (this.email || '').trim();
     const message = (this.message || '').trim();
@@ -53,13 +57,21 @@ export class ContactComponent {
       return;
     }
 
-    const waPhone = (this.contactInfo.phoneValue || '').replace(/\D/g, '');
-    const waText = `Hello, I'm ${name}. Email: ${email}. Message: ${message}`;
-    const waUrl = `https://wa.me/${waPhone}?text=${encodeURIComponent(waText)}`;
-    window.open(waUrl, '_blank');
+    this.isLoading = true;
 
-    this.name = '';
-    this.email = '';
-    this.message = '';
+    this.contactService.sendMessage({ name, email, message }).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message sent successfully!' });
+        this.name = '';
+        this.email = '';
+        this.message = '';
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Error sending message:', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to send message. Please try again later.' });
+      }
+    });
   }
 }

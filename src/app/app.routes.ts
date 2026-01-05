@@ -7,9 +7,10 @@ import { EducationComponent } from './education/education.component';
 import { ContactComponent } from './contact/contact.component';
 import { ExperienceComponent } from './experience/experience.component';
 import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
-    { path: '', component: AboutComponent },
+    { path: '', component: LoginComponent },
     { path: 'about', component: AboutComponent },
     { path: 'skills', component: SkillsComponent },
     { path: 'projects', component: ProjectsComponent },
@@ -17,5 +18,5 @@ export const routes: Routes = [
     { path: 'education', component: EducationComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'login', component: LoginComponent },
-    { path: '**', redirectTo: '' }
+    { path: '**', component: NotFoundComponent }
 ];
