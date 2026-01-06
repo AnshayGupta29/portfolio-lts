@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
 
     this.isLoading = true;
     this.authService.sendOtp({ phoneNumber: this.phoneNumber }).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         this.isLoading = false;
         this.isOtpSent = true;
         this.messageService.add({ severity: 'success', summary: 'OTP Sent', detail: res.message });
@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
 
     this.authService.verifyOtp({ phoneNumber: this.phoneNumber, otp: this.otp }).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         this.isLoading = false;
         localStorage.setItem('auth_token', res.token);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: res.message });

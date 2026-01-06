@@ -1,0 +1,25 @@
+.header-container {
+  background-color: #1b3b6f;
+  border-bottom: 4px solid #3b82f6; /* Optional accent border like some gov sites */
+}
+
+.emblem-img {
+  height: 55px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.spin-hover {
+  transition: transform 0.5s ease;
+}
+
+.header-container:hover .spin-hover {
+  transform: rotate(180deg);
+}
+
+/* Responsive Tweaks */
+@media screen and (max-width: 768px) {
+  .header-container {
+    padding: 0.5rem;
+  }
+}

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { InputTextarea } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
@@ -11,7 +10,7 @@ import { ContactService } from '../services/contact.service';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule, InputTextModule, InputTextarea, ButtonModule, ToastModule],
+  imports: [CommonModule, FormsModule, InputTextModule, ButtonModule, ToastModule],
   providers: [MessageService],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
@@ -60,14 +59,14 @@ export class ContactComponent {
     this.isLoading = true;
 
     this.contactService.sendMessage({ name, email, message }).subscribe({
-      next: (response) => {
+      next: (response: any) => {
         this.isLoading = false;
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message sent successfully!' });
         this.name = '';
         this.email = '';
         this.message = '';
       },
-      error: (error) => {
+      error: (error: any) => {
         this.isLoading = false;
         console.error('Error sending message:', error);
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to send message. Please try again later.' });
