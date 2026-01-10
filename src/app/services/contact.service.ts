@@ -8,15 +8,21 @@ export interface ContactRequest {
   message: string;
 }
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  private apiUrl = 'http://localhost:8080/api/contact';
+  private apiUrl = `${environment.apiUrl}/contact`;
 
   constructor(private http: HttpClient) { }
 
   sendMessage(contactData: ContactRequest): Observable<any> {
     return this.http.post(this.apiUrl, contactData);
+  }
+
+  getMessages(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 }

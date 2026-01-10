@@ -11,13 +11,15 @@ interface VerifyPayload {
   otp: string;
 }
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth';
+  private baseUrl = `${environment.apiUrl}/auth`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   sendOtp(payload: LoginPayload): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(`${this.baseUrl}/login`, payload);
@@ -25,5 +27,9 @@ export class AuthService {
 
   verifyOtp(payload: VerifyPayload): Observable<{ message: string; token: string }> {
     return this.http.post<{ message: string; token: string }>(`${this.baseUrl}/verify`, payload);
+  }
+
+  resendOtp(payload: LoginPayload): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.baseUrl}/resend`, payload);
   }
 }

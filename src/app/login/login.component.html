@@ -78,6 +78,15 @@
             class="p-button-text text-white" 
             (click)="isOtpSent = false">
           </button>
+
+          <button 
+            pButton 
+            label="Resend OTP" 
+            icon="pi pi-refresh" 
+            class="p-button-outlined p-button-secondary text-white" 
+            [loading]="isLoading"
+            (click)="resendOtp()">
+          </button>
           
           <button 
             pButton 

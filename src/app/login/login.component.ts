@@ -29,16 +29,16 @@ export class LoginComponent implements OnInit {
   captcha: string = '';
   captchaInput: string = '';
   otp: string = '';
-  
+
   isOtpSent: boolean = false;
   isLoading: boolean = false;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private messageService: MessageService,
     private ngZone: NgZone,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.generateCaptcha();
@@ -100,6 +100,23 @@ export class LoginComponent implements OnInit {
       error: () => {
         this.isLoading = false;
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Invalid OTP' });
+      }
+    });
+  }
+  resendOtp() {
+    if (!this.phoneNumber) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.authService.resendOtp({ phoneNumber: this.phoneNumber }).subscribe({
+      next: (res: any) => {
+        this.isLoading = false;
+        this.messageService.add({ severity: 'success', summary: 'OTP Resent', detail: res.message });
+      },
+      error: () => {
+        this.isLoading = false;
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to resend OTP' });
       }
     });
   }
